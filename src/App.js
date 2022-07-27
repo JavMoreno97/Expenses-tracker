@@ -1,4 +1,4 @@
-import ExpenseItem from "./components/ExpenseItem";
+import Expenses from "./components/Expenses";
 
 function App() {
   const expenses = [
@@ -6,7 +6,7 @@ function App() {
       id: "e1",
       title: "Toilet Paper",
       amount: 94.12,
-      date: new Date(2020, 7, 14),
+      date: new Date(2022, 7, 14),
     },
     {
       id: "e2",
@@ -28,18 +28,10 @@ function App() {
     },
   ];
 
-  
-
   return (
     <div>
-      <h2 className="d-flex ms-1">Let's get started!</h2>
-      {expenses.map((expense) => (
-        <ExpenseItem
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      <h2>Let's get started!</h2>
+      <Expenses expenses={expenses} />
     </div>
   );
 }
