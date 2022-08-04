@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onExpenseAdd }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newAmount, setNewAmount] = useState("");
   const [newDate, setNewDate] = useState("");
@@ -23,13 +23,18 @@ const ExpenseForm = () => {
     e.preventDefault();
 
     const expenseData = {
+      id: Math.random().toString(),
       title: newTitle,
       amount: newAmount,
-      date: new Date(newDate)
-    }
+      date: new Date(newDate),
+    };
 
-    console.log(expenseData)
-  }
+    onExpenseAdd(expenseData);
+
+    setNewTitle("");
+    setNewAmount("");
+    setNewDate("");
+  };
 
   //SINGLE STATE APPROACH (NOTES ONLY)
   // const [userInput, setUserInput] = useState({
@@ -61,7 +66,7 @@ const ExpenseForm = () => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={handleTitleChange} />
+          <input type="text" value={newTitle} onChange={handleTitleChange} />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -69,6 +74,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
+            value={newAmount}
             onChange={handleAmountChange}
           />
         </div>
@@ -78,6 +84,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             max="2023-12-31"
+            value={newDate}
             onChange={handleDateChange}
           />
         </div>
