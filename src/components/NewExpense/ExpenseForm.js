@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm = ({ onExpenseAdd }) => {
+const ExpenseForm = ({ onExpenseAdd, onCloseForm }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newAmount, setNewAmount] = useState("");
   const [newDate, setNewDate] = useState("");
@@ -25,11 +25,12 @@ const ExpenseForm = ({ onExpenseAdd }) => {
     const expenseData = {
       id: Math.random().toString(),
       title: newTitle,
-      amount: newAmount,
+      amount: +newAmount,
       date: new Date(newDate),
     };
 
     onExpenseAdd(expenseData);
+    onCloseForm();
 
     setNewTitle("");
     setNewAmount("");
@@ -90,6 +91,7 @@ const ExpenseForm = ({ onExpenseAdd }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button  type="button" onClick={onCloseForm}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
